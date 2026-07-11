@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
+import { environment}  from './../../enviroment/enviroment.prod'
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectorService {
-  private baseUrl = 'http://localhost:8080/api';
+  // private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = `${environment.apiBase}/api`;
   constructor(private http: HttpClient) {}
   getAllConnectors(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/connectors`);
