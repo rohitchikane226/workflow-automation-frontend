@@ -1,0 +1,162 @@
+/* ---------------------------- */
+/*         HERO SECTION         */
+/* ---------------------------- */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem 6rem;
+  background: linear-gradient(135deg, #6c63ff 0%, #836fff 50%, #9f8bff 100%);
+  color: white;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  /* Floating gradient circles */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+    filter: blur(40px);
+    opacity: 0.4;
+  }
+
+  &::before {
+    top: -80px;
+    left: -60px;
+  }
+
+  &::after {
+    bottom: -80px;
+    right: -50px;
+  }
+
+  .content {
+    max-width: 520px;
+    z-index: 2;
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2.2rem;
+      opacity: 0.9;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #6c63ff;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+      transition: 0.3s ease;
+      letter-spacing: 0.3px;
+
+      &:hover {
+        background: #f0f0f0;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .hero-image img {
+    width: 450px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s ease;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
+
+
+/* ---------------------------- */
+/*      INTEGRATIONS SECTION    */
+/* ---------------------------- */
+.integrations {
+  padding: 4rem 6rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    color: #333;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 2.5rem;
+  }
+
+  .integration-list {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+
+    .integration-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 150px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.35s ease, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+
+      /* Light glow on hover */
+      &:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 12px 28px rgba(108, 99, 255, 0.25);
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      span {
+        display: block;
+        margin-top: 0.7rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #444;
+      }
+    }
+  }
+}
+
+/* Page background */
+
+:host {
+  display: block;
+  background: linear-gradient(
+    180deg,
+    #f4f6ff 0%,
+    #f8f9ff 40%,
+    #ffffff 100%
+  );
+}

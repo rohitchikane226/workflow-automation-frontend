@@ -1,0 +1,12 @@
+.builder-page {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .builder-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fafafa;
+  }
+  

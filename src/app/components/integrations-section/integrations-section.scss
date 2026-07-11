@@ -1,0 +1,229 @@
+/* ===============================
+   INTEGRATIONS SECTION
+================================ */
+
+.integrations{
+  padding:80px 10%;
+  background:#f8f9fc;
+}
+
+.title{
+  text-align:center;
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:30px;
+}
+
+/* ===============================
+   SEARCH BOX
+================================ */
+
+.search-box{
+  display:flex;
+  justify-content:center;
+  margin-bottom:40px;
+}
+
+.search-box input{
+  width:420px;
+  max-width:90%;
+  padding:14px 18px;
+  border-radius:12px;
+  border:1px solid #e0e3ff;
+  font-size:15px;
+  outline:none;
+  background:#fff;
+  transition:all .25s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.search-box input::placeholder{
+  color:#999;
+  font-size:14px;
+}
+
+.search-box input:focus{
+  border-color:#6c63ff;
+  box-shadow:0 6px 20px rgba(108,99,255,0.25);
+  transform:translateY(-1px);
+}
+
+/* ===============================
+   APPS GRID
+================================ */
+
+.apps-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:20px;
+  max-height:420px;
+  overflow-y:auto;
+  padding:10px;
+}
+
+/* ===============================
+   APP CARD
+================================ */
+
+.app-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid #eee;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.app-card img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  margin-bottom:8px;
+}
+
+.app-card span{
+  font-size:14px;
+  font-weight:500;
+}
+
+.app-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.app-card.active{
+  border:2px solid #635bff;
+}
+
+/* ===============================
+   SELECTED APPS
+================================ */
+
+.selected-apps{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin:25px 0;
+  flex-wrap:wrap;
+}
+
+.app-pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  padding:6px 14px;
+  border-radius:30px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.app-pill img{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+}
+
+.remove-app{
+  background:transparent;
+  border:none;
+  color:#999;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.remove-app:hover{
+  color:#ff4d4f;
+}
+
+.plus{
+  font-size:18px;
+  font-weight:bold;
+  color:#999;
+}
+
+/* ===============================
+   INTEGRATION DETAILS
+================================ */
+
+.integration-details{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+}
+
+/* two column layout */
+
+.columns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px; /* ⬅️ more space between columns */
+  width:100%;
+  max-width:1300px; /* ⬅️ increased from 1100px */
+}
+
+/* column card */
+
+.column{
+  background:#fff;
+  border-radius:14px;
+  padding:28px; /* ⬅️ more inner spacing */
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  min-height:480px; /* ⬅️ makes it taller */
+}
+
+.column h4{
+  margin-bottom:15px;
+  font-size:18px;
+  color:#333;
+  border-bottom:1px solid #eee;
+  padding-bottom:6px;
+}
+
+/* ===============================
+   ACTION / TRIGGER LIST
+================================ */
+
+.items-container{
+  max-height:360px;
+  overflow-y:auto;
+  margin-top:10px;
+}
+
+.item{
+  display:flex;
+  align-items:center;
+  gap:14px; /* ⬅️ more spacing */
+  padding:16px; /* ⬅️ bigger clickable area */
+  border-radius:10px;
+  cursor:pointer;
+  min-height:56px;
+  transition:all .2s;
+}
+
+
+.item:hover{
+  background:#f3f6ff;
+  transform:translateX(3px);
+}
+
+.item.active{
+  background:#e6edff;
+  border:1px solid #5c7cff;
+}
+
+.mini-logo{
+  width:32px;   /* ⬅️ increased from ~22/26 */
+  height:32px;
+  object-fit:contain;
+  border-radius:8px; /* ⬅️ slightly rounded looks better */
+}
+
+.item span{
+  font-size:15px; /* ⬅️ increased */
+  color:#444;
+  font-weight:500;
+}

@@ -1,0 +1,84 @@
+<div class="builder-layout">
+
+  <!-- LEFT SIDEBAR (Previous Sidebar) -->
+  <div class="builder-steps">
+    <!-- Place your previous sidebar content here -->
+    <ng-content select="[sidebar]">
+        <app-sidebar></app-sidebar>
+    </ng-content>
+  </div>
+
+  <!-- RIGHT PANEL (Workflow History) -->
+  <div class="history-panel">
+
+    <div class="workflow-history-section">
+
+      <h3 class="history-title">
+        <mat-icon>history</mat-icon>
+        Workflow Run History
+      </h3>
+
+      <div class="history-container">
+
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Run ID</th>
+              <th>Step</th>
+              <th>Time</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of pagedHistory">
+
+              <tr>
+               <td>
+  <span class="status-container">
+    <span *ngIf="item.status==='SUCCESS'" class="success">✔</span>
+    <span *ngIf="item.status==='FAILED'" class="failed">✖</span>
+    <span class="status-text">
+      {{ item.status === 'SUCCESS' ? 'SUCCESS' : item.status === 'FAILED' ? 'FAILED' : '' }}
+    </span>
+  </span>
+</td>
+
+                <td>{{item.runId}}</td>
+                <td>{{ getStepName(item.stepId) }}</td>
+                <td>{{item.createdAt | date:'medium'}}</td>
+                <td>
+  <button (click)="toggle(item.runId)">
+    <mat-icon>visibility</mat-icon>
+  </button>
+</td>
+              </tr>
+
+              <tr *ngIf="expandedRunId===item.runId">
+                <td colspan="5">
+                  <div class="details">
+                    <h4>Input</h4>
+                    <pre>{{item.inputData}}</pre>
+
+                    <h4>Output</h4>
+                    <pre>{{item.outputData}}</pre>
+                  </div>
+                </td>
+              </tr>
+
+            </ng-container>
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          <button (click)="prevPage()" [disabled]="page==1">Previous</button>
+          <span>Page {{page}}</span>
+          <button (click)="nextPage()" [disabled]="page*pageSize >= history.length">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

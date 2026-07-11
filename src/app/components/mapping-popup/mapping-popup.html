@@ -1,0 +1,25 @@
+<div class="popup-container">
+  <h2 class="popup-title">Step {{ data.stepOrder }} Outputs</h2>
+
+  <div *ngIf="!data.hasData" class="no-data">
+    <mat-icon>info</mat-icon>
+    <span>No test data available — showing only field structure.</span>
+  </div>
+
+  <div class="output-list">
+    <div *ngFor="let output of data.outputs" class="output-item">
+      <div class="output-header">
+        <div class="output-key">{{ output.label || output.key }}</div>
+        <div class="output-type">{{ output.type || 'Text' }}</div>
+      </div>
+
+      <div class="value-preview">
+        {{ output.value || '(no value yet)' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-footer">
+    <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
+  </div>
+</div>

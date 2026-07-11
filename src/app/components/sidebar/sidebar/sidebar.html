@@ -1,0 +1,31 @@
+<mat-nav-list class="sidebar">
+  <div class="sidebar-header">
+    <mat-icon>auto_awesome</mat-icon>
+    <span>Workflowify</span>
+  </div>
+
+  <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </a>
+
+  <a mat-list-item routerLink="/workflows" routerLinkActive="active-link">
+    <mat-icon>list_alt</mat-icon>
+    <span>Workflows</span>
+  </a>
+
+  <a mat-list-item routerLink="/history" routerLinkActive="active-link">
+    <mat-icon>history</mat-icon>
+    <span>History</span>
+  </a>
+
+  <a mat-list-item routerLink="/integrations" routerLinkActive="active-link">
+    <mat-icon>bolt</mat-icon>
+    <span>Integrations</span>
+  </a>
+
+  <a mat-list-item routerLink="/settings" routerLinkActive="active-link">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </a>
+</mat-nav-list>

@@ -1,0 +1,45 @@
+<div class="preview-container">
+
+  <h2>Create Workflow</h2>
+
+  <div class="preview-flow">
+
+    <!-- Trigger -->
+
+    <div class="preview-box">
+
+      <img
+        [src]="workflow?.triggerConnector|| 'assets/apps/default-app.png'"
+      />
+
+      <div class="info">
+        <small>Trigger</small>
+        <p>{{workflow?.trigger?.label}}</p>
+      </div>
+
+    </div>
+
+    <div class="arrow">→</div>
+
+    <!-- Action -->
+
+    <div class="preview-box">
+
+      <img
+        [src]="workflow?.actionConnector || 'assets/apps/default-app.png'"
+      />
+
+      <div class="info">
+        <small>Action</small>
+        <p>{{workflow?.action?.label}}</p>
+      </div>
+
+    </div>
+
+  </div>
+
+<button class="continue-btn" (click)="createWorkflow()">
+Connect
+</button>
+
+</div>

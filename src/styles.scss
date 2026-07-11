@@ -1,0 +1,117 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$rose-palette,
+      tertiary: mat.$red-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+.success-snackbar .mdc-snackbar__surface {
+  background-color: #e6f4ea !important;  // green bg
+  color: #137333 !important;
+}
+
+.success-snackbar .mdc-snackbar__label {
+  color: #137333 !important;
+  font-weight: 500;
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.connection-dialog .mat-mdc-dialog-container {
+  padding: 0 !important;
+  border-radius: 16px !important;
+}
+
+.connection-dialog .mdc-dialog__surface {
+  width: 520px !important;
+  max-width: 95vw !important;
+}
+.success-snackbar {
+  background: #4caf50 !important;
+  color: white !important;
+  font-weight: 600;
+}
+/* Left side dialog container */
+.left-side-dialog .mat-mdc-dialog-container {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Slide-in animation */
+.left-side-dialog .mat-mdc-dialog-container {
+  animation: slideInLeft 0.25s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+/* Right side dialog container */
+.right-side-dialog .mat-mdc-dialog-container {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Slide in from right */
+.right-side-dialog .mat-mdc-dialog-container {
+  animation: slideInRight 0.25s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.connection-panel .mat-mdc-dialog-container {
+  border-radius: 0;
+  animation: slideInRight 0.25s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

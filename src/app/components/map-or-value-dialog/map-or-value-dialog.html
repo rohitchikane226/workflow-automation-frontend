@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Choose Input Mode</h2>
+
+<mat-dialog-content>
+  <p>How do you want to provide the value for <strong>{{ data.field.label }}</strong>?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="enterManually()">
+    ✏️ Enter Manually
+  </button>
+  <button mat-raised-button color="accent" (click)="mapValue()">
+    🔗 Map from Previous Step
+  </button>
+</mat-dialog-actions>

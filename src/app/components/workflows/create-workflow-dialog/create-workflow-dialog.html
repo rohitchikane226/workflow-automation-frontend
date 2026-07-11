@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Create Workflow</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill" style="width:100%">
+    <mat-label>Workflow Name</mat-label>
+    <input matInput [(ngModel)]="workflowName" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" [disabled]="!workflowName" (click)="onCreate()">Create</button>
+</mat-dialog-actions>

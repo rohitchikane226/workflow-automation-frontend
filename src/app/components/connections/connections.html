@@ -1,0 +1,71 @@
+<div class="layout">
+
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="page-container">
+
+    <div class="header">
+      <h2>Connected Accounts</h2>
+
+      <button class="add-connection-btn" (click)="openAddConnection()">
+        <mat-icon>add</mat-icon>
+        <span>Add Connection</span>
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" diameter="44"></mat-progress-spinner>
+    </div>
+
+    <!-- Connections -->
+    <div class="connections-grid" *ngIf="!loading && connections.length > 0">
+      <mat-card
+        class="connection-card"
+        *ngFor="let c of pagedConnections"
+        (click)="selectConnection(c)">
+
+        <div class="card-left">
+          <img class="logo" [src]="c.connector?.logoUrl" alt="logo" />
+
+          <div class="info">
+            <h3>{{ c.name }}</h3>
+            <p>{{ c.connector?.name }}</p>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button mat-icon-button (click)="retest(c); $event.stopPropagation()">
+            <mat-icon>sync</mat-icon>
+          </button>
+          <button mat-icon-button (click)="reconnect(c); $event.stopPropagation()">
+            <mat-icon>link</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(c); $event.stopPropagation()">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </div>
+
+      </mat-card>
+    </div>
+
+    <!-- Empty -->
+    <div class="empty" *ngIf="!loading && connections.length === 0">
+      <mat-icon>account_circle</mat-icon>
+      <p>No connections yet.</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="paginator-container">
+      <mat-paginator
+        [length]="connections.length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[16]"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+
+  </div>
+</div>

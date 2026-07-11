@@ -1,0 +1,52 @@
+<div class="auth-container">
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button 
+      [class.active]="isLoginMode" 
+      (click)="switchMode(true)">
+      Login
+    </button>
+
+    <button 
+      [class.active]="!isLoginMode" 
+      (click)="switchMode(false)">
+      Signup
+    </button>
+  </div>
+
+  <!-- LOGIN FORM -->
+  <div *ngIf="isLoginMode" class="form-box">
+    <h2>Login</h2>
+
+    <input 
+      type="email" 
+      placeholder="Email" 
+      [(ngModel)]="loginData.email" />
+
+    <input 
+      type="password" 
+      placeholder="Password" 
+      [(ngModel)]="loginData.password" />
+
+    <button (click)="onLogin()">Login</button>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div *ngIf="!isLoginMode" class="form-box">
+    <h2>Signup</h2>
+
+    <input 
+      type="email" 
+      placeholder="Email" 
+      [(ngModel)]="signupData.email" />
+
+    <input 
+      type="password" 
+      placeholder="Password" 
+      [(ngModel)]="signupData.password" />
+
+    <button (click)="onSignup()">Signup</button>
+  </div>
+
+</div>

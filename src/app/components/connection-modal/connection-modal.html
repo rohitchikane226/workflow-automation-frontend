@@ -1,0 +1,58 @@
+<div class="connection-modal sidebar-modal">
+  <div class="connector-header">
+  <div class="logo-circle">
+    <img [src]="connector.logoUrl" alt="{{ connector.name }}" />
+  </div>
+  <h2 class="title">Connect {{ connector.name }}</h2>
+</div>
+  <!-- Step 1: Existing Connections Dropdown -->
+  <div *ngIf="existingConnections.length > 0" class="existing-connections">
+    <label>Select Existing Connection</label>
+    <select [(ngModel)]="selectedConnectionId">
+  <option *ngFor="let conn of existingConnections" [value]="conn.id">
+    {{ conn.name }}
+  </option>
+</select>
+    <button class="btn select-btn" (click)="selectExistingConnection()">
+      Use Selected Connection
+    </button>
+  </div>
+
+  <!-- Step 2: Add New Connection -->
+  <div *ngIf="addingNew">
+    <!-- OAuth2 Authentication -->
+    <div *ngIf="connector.authType === 'oauth2'">
+      <p>This app requires OAuth authentication.</p>
+      <button class="btn oauth-btn" (click)="startOAuth()" [disabled]="loading">
+        {{ loading ? "Redirecting..." : "Connect " + connector.name }}
+      </button>
+    </div>
+
+    <!-- API KEY Authentication -->
+    <div *ngIf="connector.authType === 'API_KEY'">
+      <p>Enter API credentials:</p>
+      <div class="form-field" *ngFor="let f of authFields">
+        <label>{{ f.label }}</label>
+        <input type="text" [(ngModel)]="formValues[f.keyName]" [placeholder]="f.placeholder" />
+      </div>
+      <button class="btn save-btn" (click)="saveConnection()" [disabled]="loading">
+        {{ loading ? "Saving..." : "Save Connection" }}
+      </button>
+    </div>
+
+    <!-- NO AUTH -->
+    <div *ngIf="connector.authType === 'NONE' || !connector.authType">
+      <p>No authentication required for this app.</p>
+      <button class="btn save-btn" (click)="saveConnection()">
+        Save Connection
+      </button>
+    </div>
+  </div>
+
+  <button *ngIf="!addingNew" class="btn add-new-btn" (click)="addingNew = true">
+    Add New Connection
+  </button>
+
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+  <button class="close-btn" (click)="close()">Close</button>
+</div>

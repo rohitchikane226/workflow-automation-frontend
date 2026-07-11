@@ -1,0 +1,392 @@
+<div class="builder-page" *ngIf="!isLoading; else loading">
+  <div class="builder-header">
+    <h2>{{ workflow?.name || 'Workflow Builder' }}</h2>
+    <div class="header-actions">
+      <div class="workflow-toggle-container" [ngClass]="workflow?.active ? 'active' : 'inactive'">
+        <mat-slide-toggle class="status-toggle" [checked]="workflow?.active"
+          (change)="onToggleWorkflow($event.checked)">
+        </mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <div class="builder-layout">
+    <div class="builder-steps">
+      <div class="step-wrapper" *ngFor="let step of steps; let i = index"></div>
+
+      <mat-card *ngFor="let step of steps; let i = index" class="step-card "
+        [ngClass]="{ 'collapsed': !step.expanded }">
+        <div *ngIf="i < steps.length - 1" class="step-arrow"></div>
+
+        <mat-expansion-panel [(expanded)]="step.expanded">
+          <mat-expansion-panel-header>
+            <div class="collapsed-view" *ngIf="!step.expanded">
+              <img class="collapsed-logo" [src]="step.selectedConnector?.logoUrl || 'assets/default-app-icon.png'" />
+              <div class="collapsed-text">
+                Step {{ i + 1 }} – {{ step.connectorName || 'Select App' }}
+              </div>
+            </div>
+
+            <!-- Expanded -->
+            <mat-panel-title *ngIf="step.expanded">
+              Step {{ i + 1 }}: {{ step.type | titlecase }}
+              <span *ngIf="step.connectorName"> | {{ step.connectorName }}</span>
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+
+          <!-- Content -->
+          <div class="step-form" *ngIf="step.expanded">
+
+            <!-- App -->
+            <div class="app-select-trigger" (click)="openAppPopup(step)">
+              <ng-container *ngIf="step.selectedConnector; else selectText">
+                <img [src]="step.selectedConnector.logoUrl || 'assets/default-app-icon.png'"
+                  class="selected-app-logo" />
+                <span class="app-name-text">{{ step.selectedConnector.name }}</span>
+              </ng-container>
+              <ng-template #selectText>
+                <span class="placeholder-text">+ Select App</span>
+              </ng-template>
+            </div>
+            <div *ngIf="step.type === 'condition'" class="condition-box">
+
+              <!-- Left field -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Field</mat-label>
+                <input matInput placeholder="Click to map or type value" [value]="getDisplayValue(step.config['left'])"
+                  (click)="openMapOrValueDialog(step, { id: 'left' })"
+                  (input)="step.config['left'] = getActualValue($event.target.value)">
+              </mat-form-field>
+
+              <!-- Operator -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Operator</mat-label>
+                <mat-select [(ngModel)]="step.config['operator']">
+                  <mat-option value="==">Equals</mat-option>
+                  <mat-option value="!=">Not Equals</mat-option>
+                  <mat-option value=">">Greater Than</mat-option>
+                  <mat-option value="<">Less Than</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- Right value -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Value</mat-label>
+                <input matInput placeholder="Enter value" [(ngModel)]="step.config['right']">
+              </mat-form-field>
+            </div>
+            <div *ngIf="step.type === 'condition'" class="condition-vertical">
+
+              <!-- CONDITION HEADER -->
+              <div class="condition-header">
+                <b>IF</b>
+                <span>{{ step.config?.left || 'Field' }}
+                  {{ step.config?.operator || '==' }}
+                  {{ step.config?.right || 'Value' }}</span>
+              </div>
+
+              <!-- TRUE PATH -->
+              <div class="condition-branch true-branch">
+
+  <div class="branch-label">✔ THEN</div>
+
+  <ng-container *ngIf="step.trueStep; else addTrueBtn">
+
+    <!-- ✅ EXACT SAME STRUCTURE AS NORMAL STEP -->
+    <mat-card class="step-card nested">
+
+      <mat-expansion-panel [(expanded)]="step.trueStep.expanded">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            THEN Step: {{ step.trueStep.connectorName || 'Select App' }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="step-form">
+
+          <!-- App -->
+          <div class="app-select-trigger" (click)="openAppPopup(step.trueStep)">
+            <ng-container *ngIf="step.trueStep.selectedConnector">
+              <img [src]="step.trueStep.selectedConnector.logoUrl" class="selected-app-logo" />
+              {{ step.trueStep.selectedConnector.name }}
+            </ng-container>
+            <ng-container *ngIf="!step.trueStep.selectedConnector">
+              + Select App
+            </ng-container>
+          </div>
+
+          <!-- Action -->
+          <mat-form-field appearance="outline" class="full-width"
+            *ngIf="step.trueStep.availableActions?.length">
+            <mat-label>Select Action</mat-label>
+            <mat-select [(ngModel)]="step.trueStep.actionId"
+              (selectionChange)="onActionSelect(step.trueStep)">
+              <mat-option *ngFor="let a of step.trueStep.availableActions" [value]="a.id">
+                {{ a.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Connection -->
+          <div class="connection-container"
+            *ngIf="step.trueStep.selectedConnector && step.trueStep.actionId">
+
+            <button mat-stroked-button class="connection-btn"
+              [ngClass]="step.trueStep.connectionId ? 'connected' : 'not-connected'"
+              (click)="openConnectionSidebar(step.trueStep)">
+
+              <ng-container *ngIf="step.trueStep.connectionId; else connectText">
+                ✅ Connected
+              </ng-container>
+
+              <ng-template #connectText>
+                🔗 Connect
+              </ng-template>
+
+            </button>
+          </div>
+
+          <!-- Fields -->
+          <div class="fields-container"
+            *ngIf="step.trueStep.connectionId && getInputFields(step.trueStep).length > 0">
+
+            <div class="field-item"
+              *ngFor="let field of getInputFields(step.trueStep)">
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ field.label }}</mat-label>
+
+                <input matInput
+                  [value]="getDisplayValue(step.trueStep.config[field.id])"
+                  (input)="onInputChange($event, step.trueStep, field)" />
+
+              </mat-form-field>
+
+            </div>
+
+          </div>
+
+          <!-- Actions -->
+          <div class="step-actions">
+
+            <button mat-stroked-button color="accent"
+              (click)="testStep(step.trueStep)">
+
+              Test Step
+            </button>
+
+            <button mat-stroked-button color="primary"
+              (click)="openOutputPopup(step.trueStep)">
+              View Outputs
+            </button>
+
+          </div>
+
+        </div>
+
+      </mat-expansion-panel>
+
+    </mat-card>
+
+  </ng-container>
+
+  <ng-template #addTrueBtn>
+    <button mat-stroked-button color="primary"
+      (click)="addBranchStep(step, 'true')">
+      + Add Step
+    </button>
+  </ng-template>
+
+</div>
+
+              <!-- ELSE LABEL -->
+              <div class="else-divider">ELSE</div>
+
+              <!-- FALSE PATH -->
+             <div class="condition-branch false-branch">
+
+  <ng-container *ngIf="step.falseStep; else addFalseBtn">
+
+    <!-- SAME STEP UI (use step.falseStep) -->
+
+  </ng-container>
+
+  <ng-template #addFalseBtn>
+    <button mat-stroked-button color="warn"
+      (click)="addBranchStep(step, 'false')">
+      + Add Step
+    </button>
+  </ng-template>
+
+</div>
+
+            </div>
+            <mat-form-field appearance="outline" class="full-width"
+              *ngIf="step.type === 'trigger' && step.availableTriggers?.length">
+              <mat-label>Select Trigger</mat-label>
+              <mat-select [(ngModel)]="step.triggerId" (selectionChange)="onTriggerSelect(step)">
+                <mat-option *ngFor="let t of step.availableTriggers" [value]="t.id">
+                  {{ t.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Action -->
+            <mat-form-field appearance="outline" class="full-width"
+              *ngIf="step.type === 'action' && step.availableActions?.length">
+              <mat-label>Select Action</mat-label>
+              <mat-select [(ngModel)]="step.actionId" (selectionChange)="onActionSelect(step)">
+                <mat-option *ngFor="let a of step.availableActions" [value]="a.id">
+                  {{ a.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Connection -->
+            <div class="connection-container" *ngIf="step.selectedConnector && (step.triggerId || step.actionId)">
+              <button mat-stroked-button class="connection-btn"
+                [ngClass]="step.connectionId ? 'connected' : 'not-connected'" (click)="openConnectionSidebar(step)">
+
+                <ng-container *ngIf="step.connectionId; else connectText">
+                  <span class="status-icon">✅</span>
+                  <span class="status-text">
+                    Connected: {{ step.connectionName }}
+                  </span>
+                </ng-container>
+
+                <ng-template #connectText>
+                  <span class="status-icon">🔗</span>
+                  <span class="status-text">Connect</span>
+                  <span class="pulse-ring"></span>
+                </ng-template>
+
+              </button>
+            </div>
+            <div class="fields-container"
+              *ngIf="step.type !== 'condition' && step.connectionId && getInputFields(step).length > 0">
+              <div class="field-item" *ngFor="let field of getInputFields(step)">
+
+                <!-- ✅ Dynamic Dropdown -->
+
+                <mat-form-field appearance="outline" class="full-width" *ngIf="isDynamicDropdown(field)">
+                  <mat-label>{{ field.label || field.name }}</mat-label>
+
+
+                  <mat-select [(ngModel)]="step.config[field.id]" [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="onDropdownChange($event, step, field)" [compareWith]="compareDropdownValues">
+
+                    <mat-option *ngFor="let opt of field.options | dropdownOptions" [value]="opt.value">
+                      {{ opt.label }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-progress-spinner *ngIf="dropdownLoaders[step.id + '_' + field.key]" diameter="20"
+                    mode="indeterminate" class="dropdown-loader">
+                  </mat-progress-spinner>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width" *ngIf="!isDynamicDropdown(field)">
+                  <mat-label>{{ field.label || field.name }}</mat-label>
+
+
+                  <input matInput [value]="getDisplayValue(step.config[field.id])"
+                    placeholder="Click to map or type value" (click)="openMapOrValueDialog(step, field)"
+                    (focus)="onFieldFocus(step, field)" (blur)="onFieldBlur(step, field)"
+                    (input)="onInputChange($event, step, field)" [ngClass]="{
+                    'mapped-field': isMappedValue(step.config[field.id])
+                    }" />
+
+                  <mat-hint *ngIf="isMappedValue(step.config[field.id])">
+                    🔗 Mapped from {{ getMappedSource(step.config[field.id]) }}
+                  </mat-hint>
+                </mat-form-field>
+
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="step-actions">
+              <button mat-stroked-button color="accent" class="test-btn" (click)="testStep(step)"
+                [disabled]="step.testing">
+
+                <span class="btn-content" *ngIf="!step.testing; else loadingTpl">
+                  <mat-icon>play_arrow</mat-icon>
+                  <span>Test Step</span>
+                </span>
+
+                <ng-template #loadingTpl>
+                  <span class="btn-content">
+                    <mat-progress-spinner diameter="18" mode="indeterminate"></mat-progress-spinner>
+                    <span>Testing...</span>
+                  </span>
+                </ng-template>
+
+              </button>
+
+              <button mat-stroked-button color="primary" (click)="openOutputPopup(step)">
+                <mat-icon>list_alt</mat-icon> View Outputs
+              </button>
+            </div>
+            <div *ngIf="step.type === 'trigger' && step.showInlineOutputs" class="popup-container inline-popup">
+              <div *ngIf="!step.inlineHasData" class="no-data">
+                <mat-icon>info</mat-icon>
+                <span>No test data available — showing only field structure.</span>
+              </div>
+
+              <div class="output-list">
+                <div *ngFor="let output of step.inlineOutputs" class="output-item">
+                  <div class="output-header">
+                    <div class="output-key">
+                      {{ output.label || output.key }}
+                    </div>
+                    <div class="output-type">
+                      {{ output.type || 'Text' }}
+                    </div>
+                  </div>
+
+                  <div class="value-preview">
+                    {{ output.value || '(no value yet)' }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="popup-footer">
+                <button mat-stroked-button color="primary" (click)="step.showInlineOutputs = false">
+                  Close
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <div class="step-connector" *ngIf="i < steps.length - 1"></div>
+      </mat-card>
+
+      <div class="add-step">
+        <button mat-fab color="primary" (click)="addStep()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+    <div class="history-button-container">
+      <button mat-raised-button color="primary" class="history-btn" (click)="openHistory()">
+        <mat-icon>history</mat-icon>
+        View Workflow History
+      </button>
+    </div>
+  </div>
+  <div class="save-alert" *ngIf="showSaveAlert">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{ saveMessage }}</span>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <p>Loading workflow...</p>
+  </div>
+</ng-template>

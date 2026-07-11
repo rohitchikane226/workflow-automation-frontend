@@ -1,0 +1,49 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: linear-gradient(90deg, #6c63ff, #836fff);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  
+    .logo a {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+  
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+  
+      .get-started {
+        background: #fff;
+        color: #6c63ff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          background: #f1f1f1;
+        }
+      }
+    }
+  }
+  

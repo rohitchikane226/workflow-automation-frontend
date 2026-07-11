@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Select a Step</h2>
+
+<mat-dialog-content>
+  <div class="step-list">
+    <div
+      class="step-card"
+      *ngFor="let s of previousSteps" 
+      (click)="openStepOutputs(s)"
+    >
+      <img
+        [src]="s.selectedConnector?.logoUrl || 'assets/default-app-icon.png'"
+        alt="{{ s.connectorName }}"
+        class="app-logo"
+      />
+      <div class="step-label">Step {{ s.stepOrder}}</div>
+    </div>
+  </div>
+</mat-dialog-content>

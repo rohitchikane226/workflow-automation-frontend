@@ -1,0 +1,44 @@
+.auth-container {
+  width: 350px;
+  margin: 80px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+}
+
+.tabs button.active {
+  background: black;
+  color: white;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}

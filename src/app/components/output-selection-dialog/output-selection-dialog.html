@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Select an Output Field</h2>
+
+<mat-dialog-content>
+  <div class="output-list" *ngIf="outputs.length; else noData">
+    <div
+      class="output-item"
+      *ngFor="let output of outputs"
+      (click)="mapField(output)"
+      title="Click to map this field"
+    >
+      <div class="output-key">{{ output.name || output.key }}</div>
+      <div class="output-value">
+        {{ output.value || 'No sample data' }}
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <p class="no-data">No outputs available for this step yet.</p>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
+</mat-dialog-actions>

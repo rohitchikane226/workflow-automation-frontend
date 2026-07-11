@@ -1,0 +1,276 @@
+/* Main Container */
+.workflow-history-section{
+  margin-top:40px;
+  padding:25px;
+  background:linear-gradient(180deg,#ffffff,#f9fafc);
+  border-radius:12px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  border:1px solid #f0f0f0;
+}
+
+/* Title */
+.history-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+  font-size:22px;
+  font-weight:600;
+  color:#333;
+}
+
+.history-title mat-icon{
+  color:#5c6bc0;
+  font-size:26px;
+}
+
+/* Table */
+.history-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* Table Header */
+.history-table thead{
+  background:#f5f7fb;
+}
+
+.history-table th{
+  padding:14px;
+  text-align:left;
+  font-size:14px;
+  font-weight:600;
+  color:#555;
+  border-bottom:1px solid #eee;
+}
+
+/* Table Rows */
+.history-table td{
+  padding:14px;
+  border-bottom:1px solid #f1f1f1;
+  font-size:14px;
+}
+
+/* Row Hover */
+.history-table tbody tr:hover{
+  background:#fafbff;
+  transition:0.2s ease;
+}
+
+/* Status Icons */
+.success{
+  color:#2e7d32;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.failed{
+  color:#d32f2f;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* View Button */
+.history-table button{
+  background:#5c6bc0;
+  color:white;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  font-size:13px;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.history-table button:hover{
+  background:#3f51b5;
+  transform:scale(1.05);
+}
+
+/* Expanded Details */
+.details{
+  background:#f8f9fd;
+  padding:15px;
+  border-radius:8px;
+  border:1px solid #eee;
+}
+
+.details h4{
+  margin:8px 0;
+  font-size:14px;
+  color:#444;
+}
+
+.details pre{
+  background:#fff;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #eee;
+  max-height:200px;
+  overflow:auto;
+  font-size:12px;
+}
+
+/* Pagination */
+.pagination{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+}
+
+.pagination button{
+  padding:7px 16px;
+  border-radius:6px;
+  border:none;
+  background:#5c6bc0;
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.pagination button:hover{
+  background:#3949ab;
+}
+
+.pagination button:disabled{
+  background:#c5cae9;
+  cursor:not-allowed;
+}
+
+.pagination span{
+  font-weight:500;
+  color:#444;
+}
+.builder-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* LEFT SIDEBAR */
+.builder-steps {
+  flex: 1;
+  max-width: 300px; /* adjust sidebar width */
+}
+
+/* RIGHT PANEL */
+.history-panel {
+  flex: 2;
+  width: 100%;
+}
+/* Status Column */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between icon and text */
+  font-weight: 600;
+}
+
+.status-text {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.success {
+  color: #22c55e; /* green */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.failed {
+  color: #ef4444; /* red */
+  font-size: 16px;
+  font-weight: bold;
+}
+/* ================================
+   General Text
+================================ */
+.workflow-history-section {
+  font-family: "Inter", "Roboto", sans-serif;
+  color: #1f2937;  /* dark gray text */
+}
+
+/* Titles */
+.history-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e3a8a; /* dark blue */
+  letter-spacing: 0.3px;
+}
+
+.history-title mat-icon {
+  font-size: 26px;
+  color: #5c6bc0;  /* subtle blue */
+}
+
+/* Table Header */
+.history-table th {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151; /* medium gray */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Table Rows */
+.history-table td {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;  /* grayish text */
+  line-height: 1.4;
+}
+
+/* Status Column Text */
+.status-text {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Success / Failed Icons */
+.success, .failed {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* View Button Text */
+.history-table button {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+/* Details Panel */
+.details h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b; /* dark gray-blue */
+  margin-bottom: 6px;
+}
+
+.details pre {
+  font-size: 12px;
+  font-family: "JetBrains Mono", monospace;
+  color: #334155;  /* dark slate gray */
+  line-height: 1.5;
+}
+
+/* Pagination */
+.pagination span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.pagination button {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

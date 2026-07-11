@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="logo">
+    <a routerLink="/">Workflowify</a>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/workflows">Workflows</a>
+
+    <!-- ✅ If logged in -->
+    <ng-container *ngIf="isLoggedIn; else loggedOut">
+      <a (click)="goToDashboard()">Dashboard</a>
+      <button class="logout" (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-template #loggedOut>
+      <a routerLink="/auth">Login</a>
+      <a routerLink="/auth">Signup</a>
+      <button class="get-started" (click)="handleGetStarted()">Get Started</button>
+    </ng-template>
+  </div>
+</nav>

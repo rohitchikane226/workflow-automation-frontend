@@ -1,0 +1,106 @@
+<section class="integrations">
+
+    <h2 class="title">Explore Integrations</h2>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search apps..." [(ngModel)]="searchText" (input)="searchApps()" />
+    </div>
+
+    <!-- Apps Grid -->
+
+    <div class="apps-grid">
+
+        <div class="app-card" *ngFor="let app of filteredConnectors" (click)="selectApp(app)"
+            [class.active]="isSelected(app)">
+
+            <img [src]="app.logoUrl || 'assets/apps/default-app.png'" [alt]="app.name" />
+
+            <span>{{app.name}}</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Trigger Action Panel -->
+
+    <!-- Trigger Action Panel -->
+
+    <!-- Selected Apps Preview -->
+<div class="selected-apps" *ngIf="selectedApps.length > 0">
+
+  <div class="app-pill" *ngFor="let app of selectedApps; let i=index">
+
+    <img [src]="app.logoUrl || 'assets/apps/default-app.png'" />
+
+    <span>{{app.name}}</span>
+
+    <button class="remove-app" (click)="removeApp(app)">✕</button>
+
+    <div class="plus" *ngIf="i < selectedApps.length-1">+</div>
+
+  </div>
+
+</div>
+
+
+    <!-- Trigger Action Panel -->
+
+   <div class="integration-details" *ngIf="selectedApps.length">
+
+  <div class="columns">
+
+    <!-- TRIGGERS -->
+    <div class="column">
+
+      <h4>Triggers</h4>
+
+      <div class="items-container">
+
+        <div
+          class="item"
+          *ngFor="let trigger of triggers"
+          (click)="selectTrigger(trigger)"
+          [class.active]="selectedTrigger?.id === trigger.id"
+        >
+
+          <img class="mini-logo" [src]="trigger.connectorLogo" />
+
+          <span>{{trigger.label}}</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+
+    <div class="column">
+
+      <h4>Actions</h4>
+
+      <div class="items-container">
+
+        <div
+          class="item"
+          *ngFor="let action of actions"
+          (click)="selectAction(action)"
+          [class.active]="selectedAction?.id === action.id"
+        >
+
+          <img class="mini-logo" [src]="action.connectorLogo" />
+
+          <span>{{action.label}}</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>

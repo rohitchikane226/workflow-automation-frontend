@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Select an App</h2>
+
+<mat-dialog-content class="popup-content">
+  <div class="app-list">
+    <div
+      class="app-card"
+      *ngFor="let c of data.connectors"
+      (click)="selectApp(c)"
+    >
+      <img
+        [src]="c.logoUrl || 'assets/default-app-icon.png'"
+        alt="{{ c.name }}"
+        class="app-logo-large"
+        (error)="onLogoError($event)"
+      />
+      <div class="app-name">{{ c.name }}</div>
+      <mat-icon *ngIf="c.isCondition" color="primary">
+    call_split
+  </mat-icon>
+    </div>
+  </div>
+</mat-dialog-content>

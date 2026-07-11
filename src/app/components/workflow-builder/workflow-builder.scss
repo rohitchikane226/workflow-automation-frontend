@@ -1,0 +1,881 @@
+/* -------------------------------
+   Workflow Builder Layout
+--------------------------------*/
+.builder-page {
+  padding: 20px;
+  background: #f7f9fc;
+}
+
+.builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+  }
+}
+
+/* -------------------------------
+   Step Cards + Connecting Line
+--------------------------------*/
+.builder-steps {
+  position: relative;
+  padding-left: 10px;
+}
+
+/* Vertical Connecting Line */
+.builder-steps::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #d0d7e2;
+  border-radius: 10px;
+}
+
+.step-card {
+  position: relative;
+  max-width:800px;
+  width: 100%;         /* adjust as needed */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  border-radius: 14px !important;
+  overflow: hidden;
+}
+
+
+/* Dot in center for each card */
+.step-card::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 25px;
+  width: 14px;
+  height: 14px;
+  background: #4a90e2;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 5px #c1cbd6;
+}
+
+/* -------------------------------
+   Collapsed Panel View (Logo + Name Only)
+--------------------------------*/
+.mat-expansion-panel-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded .collapsed-view {
+  display: none; /* hide collapsed view when expanded */
+}
+
+/* When collapsed → Show this */
+.collapsed-view {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.collapsed-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.collapsed-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Hide default Angular text when collapsed */
+.mat-expansion-panel-header:not(.mat-expanded) .mat-panel-title {
+  display: none !important;
+}
+
+/* -------------------------------
+   App Selector UI
+--------------------------------*/
+.app-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 2px dashed #bfc5d1;
+  background: #f9fbff;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: 0.2s ease;
+}
+
+.app-select-trigger:hover {
+  border-color: #7da5ff;
+  background: #eef4ff;
+}
+
+.selected-app-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.app-name-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* -------------------------------
+   Beautiful Input Fields
+--------------------------------*/
+.fields-container {
+  display: grid;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.field-item mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* Highlight mapped fields */
+// .mapped-field {
+//   background: #e9f3ff !important;
+//   border-left: 4px solid #4a90e2 !important;
+//   font-weight: 600;
+// }
+/* Mapping indicator – left side only */
+// .mapped-field {
+//   position: relative;
+//   background: #e9f3ff !important;   /* remove full bg */
+//   font-weight: 600;
+// }
+
+// /* Left color bar */
+// .mapped-field::before {
+//   content: "";
+//   position: absolute;
+//   left: -6px;
+//   top: 8px;
+//   width: 4px;
+//   height: calc(100% - 16px);
+//   background: #4a90e2;
+//   border-radius: 6px;
+// }
+.mapped-field {
+  position: relative;
+    max-width: 20%;
+  background: linear-gradient(135deg, #4a90e2, #62a4f4) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.dropdown-loader {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+/* Container */
+.workflow-toggle-container{
+  margin-left:auto;
+}
+
+/* SCALE whole toggle */
+.status-toggle{
+  transform:scale(1.25);
+}
+
+/* TRACK SIZE (this controls width) */
+.status-toggle .mdc-switch__track{
+  width:90px !important;
+  height:34px !important;
+  border-radius:30px !important;
+}
+
+/* HANDLE SIZE */
+.status-toggle .mdc-switch__handle{
+  width:30px !important;
+  height:30px !important;
+  top:2px !important;
+}
+
+/* GREEN when active */
+.workflow-toggle-container.active
+.status-toggle .mdc-switch__track{
+  background:#22c55e !important;
+}
+
+/* RED when inactive */
+.workflow-toggle-container.inactive
+.status-toggle .mdc-switch__track{
+  background:#ef4444 !important;
+}
+
+/* TEXT DEFAULT (OFF) */
+.status-toggle .mdc-switch__track::after{
+  content:"OFF";
+  position:absolute;
+  width:100%;
+  text-align:right;
+  padding-right:12px;
+  font-size:13px;
+  font-weight:700;
+  color:white;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+/* TEXT ACTIVE */
+.workflow-toggle-container.active
+.status-toggle .mdc-switch__track::after{
+  content:"ON";
+  text-align:left;
+  padding-left:14px;
+}
+
+/* Left color bar */
+.mapped-field::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 8px;
+  width: 4px;
+  height: calc(100% - 16px);
+  background: #ffffff;
+  border-radius: 6px;
+}
+
+/* -------------------------------
+   Step Action Buttons
+--------------------------------*/
+.step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+
+  button {
+    padding: 6px 14px;
+    border-radius: 8px !important;
+  }
+}
+
+/* -------------------------------
+   Add Step Button
+--------------------------------*/
+.add-step {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.add-step button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50% !important;
+  min-width: unset !important;
+  padding: 0 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all .2s ease;
+}
+
+.add-step button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.add-step mat-icon {
+  font-size: 22px;
+}
+
+/* ---------------------------------------------------
+   Compact collapsed view (Zapier style)
+---------------------------------------------------- */
+
+/* When the panel is collapsed → shrink the whole card */
+// .step-card.collapsed {
+//   width: 280px !important;
+//   margin: 0 auto 40px;  
+//   margin-bottom: 40px;   /* small width */
+//   margin-left: 40px;
+//   border-radius: 14px !important;
+//   overflow: hidden;
+//   background: #ffffff;
+//   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+//   transition: 0.25s ease;
+// }
+
+.step-card.collapsed {
+   width: 420px !important; 
+  margin: 0 auto 40px;   /* center horizontally */
+  border-radius: 14px !important;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
+}
+
+// .step-card:not(.collapsed) {
+//   background: linear-gradient(180deg, #ffffff, #f6f9ff);
+//   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+// }
+
+
+/* Collapsed header height */
+.step-card.collapsed .mat-expansion-panel-header {
+  height: 60px !important;
+  padding: 10px 14px !important;
+}
+
+/* Hide everything except collapsed view */
+.step-card.collapsed .mat-panel-title,
+.step-card.collapsed .step-form {
+  display: none !important;
+}
+
+/* Collapsed view content */
+.collapsed-view {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.collapsed-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #f0f3f9;
+  padding: 4px;
+}
+
+.collapsed-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  white-space: nowrap;
+}
+.connection-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.connection-select {
+  flex: 1;
+}
+
+.full {
+  width: 100%;
+}
+.connection-container {
+  margin: 8px 0;
+
+  .connection-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+
+    &.connected {
+      background: linear-gradient(90deg, #4caf50, #66bb6a);
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background: linear-gradient(90deg, #43a047, #5aa857);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &.not-connected {
+      background: linear-gradient(90deg, #2196f3, #42a5f5);
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background: linear-gradient(90deg, #1976d2, #1e88e5);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .status-icon {
+      font-size: 16px;
+    }
+
+    .status-text {
+      white-space: nowrap;
+    }
+  }
+}
+
+.output-panel-inline{
+  margin-top:15px;
+  border:1px solid #e0e0e0;
+  border-radius:10px;
+  padding:10px;
+  background:#fafafa;
+}
+
+.output-title{
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.output-item{
+  border-radius:6px;
+  margin-bottom:4px;
+}
+
+.output-header{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  padding:6px;
+  border-radius:6px;
+  transition:.2s;
+}
+
+.output-header:hover{
+  background:#f1f3f4;
+}
+
+.output-key{
+  font-weight:500;
+}
+
+.value-preview{
+  padding:6px 6px 6px 28px;
+  color:#555;
+  font-family:monospace;
+  background:#fff;
+  border-left:2px solid #2196f3;
+}
+/* ---------------------------------------------------
+   Popup Styled to Match Workflow Builder Theme
+---------------------------------------------------- */
+
+.inline-popup {
+  margin-top: 18px;
+}
+
+/* ===============================================
+   ELITE WORKFLOW OUTPUT POPUP (SaaS LEVEL)
+=============================================== */
+
+.popup-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  padding: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 20px 50px rgba(74, 144, 226, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  animation: popupFade 0.4s ease forwards;
+}
+
+/* Gradient glow background */
+.popup-container::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #4a90e230, transparent 70%);
+  top: -100px;
+  right: -100px;
+  z-index: 0;
+}
+
+.popup-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation */
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===============================================
+   Title
+=============================================== */
+
+.popup-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a2b4c;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+.popup-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #4a90e2, #62a4f4);
+}
+
+
+.limited-scroll {
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Modern Scrollbar */
+.limited-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.limited-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.limited-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4a90e2, #62a4f4);
+  border-radius: 10px;
+}
+
+
+.output-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(230, 236, 245, 0.9);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(74, 144, 226, 0.08);
+  overflow: hidden;
+}
+
+.output-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(135deg, #4a90e2, #62a4f4);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+/* Hover Lift */
+.output-item:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(74, 144, 226, 0.18);
+}
+
+.output-item:hover::before {
+  opacity: 1;
+}
+
+/* ===============================================
+   Header
+=============================================== */
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.output-key {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2d3d;
+  letter-spacing: 0.3px;
+}
+
+/* Type Badge */
+.output-type {
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #eef4ff, #e3f0ff);
+  color: #4a90e2;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.1);
+}
+
+/* ===============================================
+   Value Section
+=============================================== */
+
+.value-preview {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(145deg, #f9fbff, #ffffff);
+  border-radius: 12px;
+  font-size: 13px;
+  color: #334155;
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1.6;
+  border: 1px solid #e4ecf7;
+  word-break: break-word;
+  position: relative;
+}
+
+/* Subtle inner glow */
+.value-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(circle at top right, #4a90e210, transparent 60%);
+  pointer-events: none;
+}
+
+/* ===============================================
+   Footer
+=============================================== */
+
+.popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.popup-footer button {
+  border-radius: 30px !important;
+  padding: 8px 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 14px rgba(74, 144, 226, 0.2);
+}
+
+.output-loader {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.test-btn {
+  min-height: 42px; /* Prevent height jumping */
+}
+
+.test-btn .btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.test-btn mat-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.test-btn mat-progress-spinner {
+  width: 18px !important;
+  height: 18px !important;
+}
+.workflow-history-section{
+margin-top:40px;
+padding:20px;
+background:white;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.history-title{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:15px;
+font-size:20px;
+}
+.history-button-container{
+  width:240px;
+  display:flex;
+  justify-content:flex-end;
+  margin-top:0;
+}
+
+.history-btn{
+  padding:10px 22px;
+  font-size:15px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.15);
+  transition:all 0.2s ease;
+}
+
+.history-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.18);
+}
+.builder-layout{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:40px;
+}
+
+/* LEFT SIDE */
+.builder-steps{
+flex:1;
+max-width:1000px;   /* wider steps */
+}
+
+/* RIGHT SIDE */
+.history-panel{
+width:220px;
+display:flex;
+justify-content:flex-end;
+}
+
+/* BUTTON STYLE */
+.history-btn{
+display:flex;
+align-items:center;
+gap:8px;
+padding:10px 18px;
+border-radius:8px;
+font-weight:500;
+box-shadow:0 3px 8px rgba(0,0,0,0.15);
+transition:all 0.2s ease;
+}
+
+.history-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+.mapping-editor {
+  min-height: 42px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+}
+
+.mapping-chip {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 6px;
+  margin: 2px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.mapped-chips-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.mapped-chips-container .user-text {
+  font-size: 14px;
+  padding: 2px 4px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+
+
+.condition-box {
+  border: 1px dashed #3f51b5;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f5f7ff;
+  margin-top: 10px;
+}
+
+.condition-vertical {
+  margin-top: 15px;
+  border-left: 3px solid #3f51b5;
+  padding-left: 15px;
+}
+
+.condition-header {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.condition-branch {
+  margin-left: 10px;
+  padding: 10px;
+  border-left: 2px dashed #ccc;
+}
+
+.branch-label {
+  font-weight: bold;
+  color: #4caf50;
+  margin-bottom: 5px;
+}
+
+.else-divider {
+  margin: 10px 0;
+  font-weight: bold;
+  color: #f44336;
+}
+
+.nested-step-card {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.nested {
+  margin-left: 20px;
+  border-left: 3px solid #4caf50;
+  padding-left: 10px;
+}
+
+.false-branch .nested {
+  border-left: 3px solid #f44336;
+}
+
+.condition-branch {
+  margin-top: 15px;
+}
