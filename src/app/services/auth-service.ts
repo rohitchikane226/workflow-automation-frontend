@@ -7,8 +7,8 @@ import { environment}  from './../../enviroment/enviroment.prod'
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-   private baseUrl = 'http://localhost:8081';
-   //private baseUrl = environment.apiBase;
+   //private baseUrl = 'http://localhost:8081';
+   private baseUrl = environment.apiBase;
   constructor(private http: HttpClient, private router: Router) {}
 
   login(data: any) {

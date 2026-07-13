@@ -5,8 +5,8 @@ import { environment}  from './../../enviroment/enviroment.prod'
 
 @Injectable({ providedIn: 'root' })
 export class WorkflowService {
-   private baseUrl = 'http://localhost:8081/api/workflows';
-//private baseUrl = `${environment.apiBase}/api/workflows`;
+   //private baseUrl = 'http://localhost:8081/api/workflows';
+private baseUrl = `${environment.apiBase}/api/workflows`;
   constructor(private http: HttpClient) { }
 
   getAllWorkflows(): Observable<any[]> {

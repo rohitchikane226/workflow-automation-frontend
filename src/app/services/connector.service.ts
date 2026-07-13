@@ -7,8 +7,8 @@ import { environment}  from './../../enviroment/enviroment.prod'
   providedIn: 'root'
 })
 export class ConnectorService {
-   private baseUrl = 'http://localhost:8081/api';
-  //private baseUrl = `${environment.apiBase}/api`;
+   //private baseUrl = 'http://localhost:8081/api';
+  private baseUrl = `${environment.apiBase}/api`;
   constructor(private http: HttpClient) {}
   getAllConnectors(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/connectors`);
