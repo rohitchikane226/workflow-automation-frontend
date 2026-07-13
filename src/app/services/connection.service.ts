@@ -5,8 +5,8 @@ import { environment}  from './../../enviroment/enviroment.prod'
 @Injectable({ providedIn: 'root' })
 export class ConnectionService {
 
-  //private API = 'http://localhost:8080/api';
-  private API =`${environment.apiBase}/api`;
+  private API = 'http://localhost:8081/api';
+  //private API =`${environment.apiBase}/api`;
 
   constructor(private http: HttpClient) {}
 
